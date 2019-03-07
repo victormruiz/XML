@@ -38,13 +38,12 @@ while opcion >=0 :
             precios=(doc.xpath('//aparcamiento[nombre="%s"]/preciosPlantas/precioPlanta/text()' % i))
             encontrado=False
             for x in precios:
-                if x.find(".") != -1:
-                    tratar=re.sub("\D", "", x)
-                    tratar=tratar[ 1:len(tratar) - 2]
-                    tratar=int(tratar)
+                tratar=re.sub('[a-z,:, ,€,ó,S]',"",x)
+                tratar=tratar[1:]
+                tratar=float(tratar)
+                print(tratar)
                 if limite >= tratar and encontrado == False:
                     lista.append(i)
-                    print(tratar)
                     encontrado=True
         if len(lista) != 0:
             print("Estos son los aparcamientos libres por ese precio máximo: ")
