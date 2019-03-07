@@ -34,17 +34,16 @@ while opcion >=0 :
         lista=[]
         nombres=doc.xpath("//nombre/text()")
         for i in nombres:
-            abanicobajo=input("Escribe el limite inferior del abanico: ")
-            abanicoalto=input("Escribe el limite superior del abanico: ")
+            limite=input("Hasta cuanto estás dispuesto a gastarte?: ")
             precios=(doc.xpath('//aparcamiento[nombre="%s"]/preciosPlantas/precioPlanta/text()' % i))
             for x in precios:
-                i=str(i)
                 x=re.sub("\D", "", x)
-                x=i[ 1:len(i) - 2]
-                print(x)
-                break
-                if x > abanicobajo and x < abanicoalto:
-                    print("El aparcamiento %s está dentro de tu rango de precios" % i)
+                x=x[ 1:len(x) - 2]
+                if limite <= x:
+                    print(i)
+
+
+
 
     elif opcion == 5:
         bandera=False
