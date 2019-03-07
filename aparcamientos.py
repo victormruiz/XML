@@ -19,21 +19,35 @@ while opcion >=0 :
         contar=doc.xpath("//nombre/text()")
         print("La cantidad de aparcamientos que hay son",len(contar))
     elif opcion == 3:
-        calle=input("Escribe el nombre de la calle: ")
+        calle=input("Escribe el nombre y número de la calle: ")
         buscar=doc.xpath("//direccion/text()")
         nombres=doc.xpath("//nombre/text()")
+        bandera=False
         for x, y in zip(buscar, nombres):
             if x == calle:
                 print(y)
+                bandera=True
+        if bandera==False:
+            print("No hay aparcamientos disponibles en esa calle y ese número")
     elif opcion == 4:
-        #abanico1=input("Escribe el limite inferior del abanico: ")
-        #abanico2=input("Escribe el limite superior del abanico: ")
-        precios=doc.xpath("//preciosplantas/precioplanta/text()")
-        for i in precios:
-            print (i)
-            #if abanico1 >= i and abanico2 < i:
-            #    print("yes")
+        import re
+        lista=[]
+        nombres=doc.xpath("//nombre/text()")
+        for i in nombres:
+            abanicobajo=input("Escribe el limite inferior del abanico: ")
+            abanicoalto=input("Escribe el limite superior del abanico: ")
+            precios=(doc.xpath('//aparcamiento[nombre="%s"]/preciosPlantas/precioPlanta/text()' % i))
+            for x in precios:
+                i=str(i)
+                x=re.sub("\D", "", x)
+                x=i[ 1:len(i) - 2]
+                print(x)
+                break
+                if x > abanicobajo and x < abanicoalto:
+                    print("El aparcamiento %s está dentro de tu rango de precios" % i)
+
     elif opcion == 5:
+        bandera=False
         telefono=input("Escribe el número de teléfono: ")
         telefonocomunidad=doc.xpath("//telefonoAdminComunidadUsuarios/text()")
         telefonoconcesionario=doc.xpath("//telefonoInfoConcesionario/text()")
@@ -42,11 +56,19 @@ while opcion >=0 :
                 imagenes=doc.xpath('//aparcamiento[telefonoAdminComunidadUsuarios="%s"]/fotos/foto/text()' % telefono)
             if y==telefono:
                 imagenes=doc.xpath('//aparcamiento[telefonoInfoConcesionario="%s"]/fotos/foto/text()' % telefono)
-        for i in imagenes:
-            print(i)
+        if len(imagenes != 0):
+            for i in imagenes:
+                print(i)
+        else:
+            print("No hay imágenes asociadas a ese telefono")
+
+
+
+
     elif opcion == 0:
         print("Saliendo del programa.")
     else:
+        print("")
         print("Opción no permitida")
     print("Elige el ejercicio que quieres comprobar")
     print("1.- ejercicio 1")
