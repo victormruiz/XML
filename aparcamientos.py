@@ -33,18 +33,25 @@ while opcion >=0 :
         import re
         lista=[]
         nombres=doc.xpath("//nombre/text()")
+        limite=int(input("Hasta cuanto estás dispuesto a gastarte?: "))
         for i in nombres:
-            limite=input("Hasta cuanto estás dispuesto a gastarte?: ")
             precios=(doc.xpath('//aparcamiento[nombre="%s"]/preciosPlantas/precioPlanta/text()' % i))
+            encontrado=False
             for x in precios:
-                x=re.sub("\D", "", x)
-                x=x[ 1:len(x) - 2]
-                if limite <= x:
-                    print(i)
-
-
-
-
+                if x.find(".") != -1:
+                    tratar=re.sub("\D", "", x)
+                    tratar=tratar[ 1:len(tratar) - 2]
+                    tratar=int(tratar)
+                if limite >= tratar and encontrado == False:
+                    lista.append(i)
+                    print(tratar)
+                    encontrado=True
+        if len(lista) != 0:
+            print("Estos son los aparcamientos libres por ese precio máximo: ")
+            for i in lista:
+                print(i)
+        else:
+            print("No hay ningún aparcamiento libre con ese rango de precio.")
     elif opcion == 5:
         bandera=False
         telefono=input("Escribe el número de teléfono: ")
@@ -55,7 +62,7 @@ while opcion >=0 :
                 imagenes=doc.xpath('//aparcamiento[telefonoAdminComunidadUsuarios="%s"]/fotos/foto/text()' % telefono)
             if y==telefono:
                 imagenes=doc.xpath('//aparcamiento[telefonoInfoConcesionario="%s"]/fotos/foto/text()' % telefono)
-        if len(imagenes != 0):
+        if len(imagenes) != 0:
             for i in imagenes:
                 print(i)
         else:
