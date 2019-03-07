@@ -66,15 +66,14 @@ while opcion >=0 :
                 print(i)
         else:
             print("No hay imágenes asociadas a ese telefono")
-
-
-
-
     elif opcion == 0:
         print("Saliendo del programa.")
     else:
         print("")
         print("Opción no permitida")
+    imagenes=[]
+    lista=[]
+    buscar=[]
     print("Elige el ejercicio que quieres comprobar")
     print("1.- ejercicio 1")
     print("2.- ejercicio 2")
