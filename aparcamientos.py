@@ -68,6 +68,7 @@ while opcion >=0 :
             print("No hay imágenes asociadas a ese telefono")
     elif opcion == 0:
         print("Saliendo del programa.")
+        break
     else:
         print("")
         print("Opción no permitida")
