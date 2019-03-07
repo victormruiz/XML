@@ -8,24 +8,24 @@ print("3.- ejercicio 3")
 print("4.- ejercicio 4")
 print("5.- ejercicio 5")
 print("0.- salir")
-opcion=int(input(""))
-while opcion <= 5 and opcion >=0 :
+opcion=int(input("¿opcion?: "))
+while opcion >=0 :
     if opcion == 1:
         nombres=doc.xpath("//nombre/text()")
         print("Estos son los aparcamientos que hay:")
         for i in nombres:
             print (i)
-    if opcion == 2:
+    elif opcion == 2:
         contar=doc.xpath("//nombre/text()")
         print("La cantidad de aparcamientos que hay son",len(contar))
-    if opcion == 3:
+    elif opcion == 3:
         calle=input("Escribe el nombre de la calle: ")
         buscar=doc.xpath("//direccion/text()")
         nombres=doc.xpath("//nombre/text()")
         for x, y in zip(buscar, nombres):
             if x == calle:
                 print(y)
-    if opcion == 4:
+    elif opcion == 4:
         #abanico1=input("Escribe el limite inferior del abanico: ")
         #abanico2=input("Escribe el limite superior del abanico: ")
         precios=doc.xpath("//preciosplantas/precioplanta/text()")
@@ -33,7 +33,7 @@ while opcion <= 5 and opcion >=0 :
             print (i)
             #if abanico1 >= i and abanico2 < i:
             #    print("yes")
-    if opcion == 5:
+    elif opcion == 5:
         telefono=input("Escribe el número de teléfono: ")
         telefonocomunidad=doc.xpath("//telefonoAdminComunidadUsuarios/text()")
         telefonoconcesionario=doc.xpath("//telefonoInfoConcesionario/text()")
@@ -44,8 +44,10 @@ while opcion <= 5 and opcion >=0 :
                 imagenes=doc.xpath('//aparcamiento[telefonoInfoConcesionario="%s"]/fotos/foto/text()' % telefono)
         for i in imagenes:
             print(i)
-    if opcion == 0:
+    elif opcion == 0:
         print("Saliendo del programa.")
+    else:
+        print("Opción no permitida")
     print("Elige el ejercicio que quieres comprobar")
     print("1.- ejercicio 1")
     print("2.- ejercicio 2")
@@ -53,4 +55,4 @@ while opcion <= 5 and opcion >=0 :
     print("4.- ejercicio 4")
     print("5.- ejercicio 5")
     print("0.- salir")
-    opcion=int(input(""))
+    opcion=int(input("¿opcion?: "))
