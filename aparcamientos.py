@@ -41,7 +41,6 @@ while opcion >=0 :
                 tratar=re.sub('[a-z,:, ,€,ó,S]',"",x)
                 tratar=tratar[1:]
                 tratar=float(tratar)
-                print(tratar)
                 if limite >= tratar and encontrado == False:
                     lista.append(i)
                     encontrado=True
